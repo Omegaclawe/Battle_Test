@@ -11,7 +11,7 @@ public class FloatyText : MonoBehaviour {
 	private Rect drect;
 
 	//void
-	public void ready() {
+	public void ready() { //Gotta call this to get it started after setting public vars.
 		Rect bounds = new Rect(daRules.screenBuffer,daRules.screenBuffer,Screen.width-daRules.screenBuffer*2,Screen.height-daRules.screenBuffer*2);
 		drect = new Rect(bounds.xMin + (bounds.xMax - bounds.xMin) * (attack ? daRules.attackhealthHorPos : daRules.defendhealthHorPos)- daRules.healthTxtWidth / 2, bounds.yMin + (bounds.yMax - bounds.yMin) * daRules.textVertPos - daRules.healthTxtHeight / 2, daRules.healthTxtWidth, daRules.healthTxtHeight);
 	}
@@ -19,9 +19,9 @@ public class FloatyText : MonoBehaviour {
 	// Update is called once per frame
 	void OnGUI() {
 		GUI.Box (drect, text);
-		drect.y -= 0.5f;
+		drect.y -= 0.5f; //Sliiiide down
 		++counter;
-		if(counter > 100) {
+		if(counter > 100) { //Live for 100 frames
 			Destroy (this);
 		}
 	}

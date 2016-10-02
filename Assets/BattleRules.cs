@@ -13,6 +13,7 @@ public class BattleRules : MonoBehaviour {
 	public int Triangle_Hit_Deduction = 30;
 	public float Triangle_Damage_Reverse_Multiplier = .75f; //Attacking a stronger weapon
 
+	//Positioning for GUI Elements. Sort of a Placeholder
 	public float screenBuffer = 50.0f;
 	public float spriteVertPos = 0.5f;
 	public float attackHorPos = 0.3f;

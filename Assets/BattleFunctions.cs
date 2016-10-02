@@ -23,15 +23,18 @@ public class BattleFunctions : MonoBehaviour {
 
 		//Determine Hit Chance:
 		int hitChance = (int)( attacker.weaponAccuracy + attacker.skill * 2 - defender.evade * 2 + (attackerSpeed - defenderSpeed) / 2);
-		if (TriangleAdvantage (attacker, defender)) {
+		if (TriangleAdvantage (attacker, defender)) { //Weapons Triangle Advantage
 			hitChance += daRules.Triangle_Hit_Bonus;
 			advantage = true;
-		} else if (TriangleAdvantage (attacker, defender)) {
+		} else if (TriangleAdvantage (attacker, defender)) { //Weapons Disadvantage
 			hitChance -= daRules.Triangle_Hit_Deduction;
 			disadvantage = true;
 		}
 		hitChance = (hitChance < 0) ? 0 : ((hitChance > 100) ? 100 : hitChance); //clamp value between 1 and 100
 		int hitRoll = Random.Range(0,100);
+		Debug.Log ("Hit Chance and Roll");
+		Debug.Log (hitChance);
+		Debug.Log (hitRoll);
 		if (hitRoll > hitChance) {
 			return attackResults.MISS; // The attack has missed
 		}
@@ -39,16 +42,19 @@ public class BattleFunctions : MonoBehaviour {
 		int critChance = (int)( attacker.weaponCrit + attacker.skill);
 		bool crit = false;
 		hitRoll = Random.Range(0,100);
+		Debug.Log ("Crit Chance and Roll");
+		Debug.Log (critChance);
+		Debug.Log (hitRoll);
 		if (hitRoll <= critChance) {
 			crit = true;
 		}
 		//Determine damage
-		int damage = (int) ( (attack - defender.defense) * (crit ? daRules.Crit_Multiplier : 1.0f) * (advantage ? daRules.Triangle_Damage_Multiplier : 1.0f) * (disadvantage ? daRules.Triangle_Damage_Reverse_Multiplier : 1.0f));
+		int damage = (int) ( (attack - defender.defense) * (crit ? daRules.Crit_Multiplier : 1.0f) * (advantage ? daRules.Triangle_Damage_Multiplier : 1.0f) * (disadvantage ? daRules.Triangle_Damage_Reverse_Multiplier : 1.0f)); // Apply appropriate multipliers
 		Debug.Log (damage);
 		if (damage<= 0) {
 			return attackResults.WEAK; //Attack to weak to cause damage
 		}
-		defender.health -= damage;
+		defender.health -= damage; //Cause damage
 		return crit ? attackResults.CRIT : attackResults.HIT;
 	}
 
@@ -69,7 +75,7 @@ public class BattleFunctions : MonoBehaviour {
 		Debug.Log ("StartBattle");
 		//Start GUI
 		BattleGUI gui = gameObject.AddComponent<BattleGUI>();
-		FloatyText ftxt;
+		FloatyText ftxt; //to make new Floaty Text objects.
 		gui.daRules = daRules;
 		gui.Attacker = attacker;
 		gui.Defender = defender;
@@ -79,10 +85,13 @@ public class BattleFunctions : MonoBehaviour {
 		if(daRules.DeterministicRNG) {
 			Random.InitState (daRules.RNG_Seed);
 		}
+
+		//Consolidate values
 		int attackerSpeed = (int)  attacker.speed + attacker.weaponSpeed;
 		int defenderSpeed = (int)  defender.speed + defender.weaponSpeed;
 
 		attackResults result;
+
 		//Attacker Attacks
 		result = Attack(attacker, defender, daRules);
 		Debug.Log (result);
@@ -162,7 +171,7 @@ public class BattleFunctions : MonoBehaviour {
 		Debug.Log ("EndBattle5");
 	}
 
-	public void Battle(BattleStats attacker, BattleStats defender, BattleRules daRules, bool oneway = false) {
+	public void Battle(BattleStats attacker, BattleStats defender, BattleRules daRules, bool oneway = false) { //This all exists to make waiting work.
 		StartCoroutine(doBattle(attacker,defender,daRules,oneway));
 	}
 }

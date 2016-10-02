@@ -3,7 +3,7 @@ using System.Collections;
 //using BattleRules;
 //using BattleStats;
 
-public class BattleGUI : MonoBehaviour {
+public class BattleGUI : MonoBehaviour { //This should really be replaced by a proper drawing / animation system eventually. This should be considered placeholder graphics.
 
 	public BattleRules daRules;
 	public BattleStats Attacker;
@@ -15,7 +15,7 @@ public class BattleGUI : MonoBehaviour {
 	private Rect DefenseHPBounds;
 
 	// Use this for initialization
-	public void ready () {
+	public void ready () { // Gotta call this to get it started after setting public vars.
 		Debug.Log ("GUI Ready");
 		bounds = new Rect(daRules.screenBuffer,daRules.screenBuffer,Screen.width-daRules.screenBuffer*2,Screen.height-daRules.screenBuffer*2);
 		AttackSpriteBounds = new Rect (bounds.xMin + (bounds.xMax - bounds.xMin) * daRules.attackHorPos - Attacker.Sprite.width / 2, bounds.yMin + (bounds.yMax - bounds.yMin) * daRules.spriteVertPos - Attacker.Sprite.height / 2, Attacker.Sprite.width, Attacker.Sprite.height);

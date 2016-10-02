@@ -9,7 +9,7 @@ public class NewBehaviourScript : MonoBehaviour {
 	private BattleFunctions bfunct;
 
 	// Use this for initialization
-	void Start () {
+	void Start () { //This is just to start the battle.
 		bfunct = GetComponentInParent<BattleFunctions> ();
 		bfunct.Battle (Attacker.GetComponent<BattleStats>(), Defender.GetComponent<BattleStats>(), Rules.GetComponent<BattleRules>());
 	}
