@@ -15,7 +15,7 @@ public class BattleGUI : MonoBehaviour { //This should really be replaced by a p
 	private Rect DefenseHPBounds;
 
 	// Use this for initialization
-	public void ready () { // Gotta call this to get it started after setting public vars.
+	public void ready () { // Gotta call this to get it started after setting public vars.]
 		Debug.Log ("GUI Ready");
 		bounds = new Rect(daRules.screenBuffer,daRules.screenBuffer,Screen.width-daRules.screenBuffer*2,Screen.height-daRules.screenBuffer*2);
 		AttackSpriteBounds = new Rect (bounds.xMin + (bounds.xMax - bounds.xMin) * daRules.attackHorPos - Attacker.Sprite.width / 2, bounds.yMin + (bounds.yMax - bounds.yMin) * daRules.spriteVertPos - Attacker.Sprite.height / 2, Attacker.Sprite.width, Attacker.Sprite.height);
@@ -36,4 +36,7 @@ public class BattleGUI : MonoBehaviour { //This should really be replaced by a p
 		GUI.Box(DefenseHPBounds,Defender.health.ToString());
 	}
 		
+	public void battleEnd() {
+		Destroy (this);
+	}
 }

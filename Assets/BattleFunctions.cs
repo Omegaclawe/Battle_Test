@@ -106,6 +106,7 @@ public class BattleFunctions : MonoBehaviour {
 		if (defender.health <= 0) {
 			//Aw he dead. Handle death here.
 			Debug.Log ("EndBattle1");
+			gui.battleEnd ();
 			yield break;
 		}
 		if (!oneway) { //Oneway attacks for out of range or something
@@ -122,6 +123,7 @@ public class BattleFunctions : MonoBehaviour {
 			if (attacker.health <= 0) {
 				//Aw he dead. Handle death here.
 				Debug.Log ("EndBattle2");
+				gui.battleEnd ();
 				yield break;
 			}
 		}
@@ -129,6 +131,7 @@ public class BattleFunctions : MonoBehaviour {
 		if(daRules.Speed_Difference_For_Double_Attack > Mathf.Abs(attackerSpeed - defenderSpeed)) {
 			//No doubles
 			Debug.Log ("EndBattle6");
+			gui.battleEnd ();
 			yield break;
 		}
 		if(attackerSpeed > defenderSpeed) {
@@ -146,6 +149,7 @@ public class BattleFunctions : MonoBehaviour {
 			if (defender.health <= 0) {
 				//Aw he dead. Handle death here.
 				Debug.Log ("EndBattle3");
+				gui.battleEnd ();
 				yield break;
 			}
 		} else {
@@ -164,11 +168,13 @@ public class BattleFunctions : MonoBehaviour {
 				if (attacker.health <= 0) {
 					//Aw he dead. Handle death here.
 					Debug.Log ("EndBattle4");
+					gui.battleEnd ();
 					yield break;
 				}
 			}
 		}
 		Debug.Log ("EndBattle5");
+		gui.battleEnd ();
 	}
 
 	public void Battle(BattleStats attacker, BattleStats defender, BattleRules daRules, bool oneway = false) { //This all exists to make waiting work.
